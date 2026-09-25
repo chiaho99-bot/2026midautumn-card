@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>月宮抽祝福｜佳禾的中秋賀卡</title>
+<meta name="description" content="挑一位月宮居民，聽祂的故事，收下今年來自佳禾的中秋祝福。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&family=Noto+Serif+TC:wght@400;600;900&family=Cormorant+Garamond:ital,wght@1,500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+  :root {
+    color-scheme: dark;
+    --night: #0e1330;
+    --deep: #1b2358;
+    --moon: #f3dc9a;
+    --moon-hi: #fff6d6;
+    --silver: #eceee3;
+    --dim: #aeb4d4;
+    --osmanthus: #e9a64c;
+    --cinnabar: #c8452e;
+    --line: rgba(243, 220, 154, 0.28);
+    --card: rgba(27, 35, 88, 0.6);
+    --f-brush: "Zhi Mang Xing", "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+    --f-serif: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+    --f-en: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  }
+  html, body { height: auto; }
+  body {
+    background: var(--night);
+    background-image: radial-gradient(120% 70% at 50% 0%, var(--deep) 0%, var(--night) 62%);
+    background-attachment: fixed;
+    color: var(--silver);
+    font-family: var(--f-serif);
+    font-size: 16px;
+    line-height: 1.75;
+    padding-inline: 16px;
+    padding-block: 28px 40px;
+    overflow-x: hidden;
+  }
+  #stars { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+  #burst { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
+  main { position: relative; z-index: 1; max-width: 460px; margin-inline: auto; display: flex; flex-direction: column; gap: 26px; }
+  .defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+  header { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
+  .moon {
+    width: min(40vw, 150px); aspect-ratio: 1; border-radius: 50%;
+    background:
+      radial-gradient(circle at 34% 30%, rgba(255,255,255,.55), rgba(255,255,255,0) 38%),
+      radial-gradient(circle at 66% 62%, rgba(200,160,80,.28) 0 9%, transparent 10%),
+      radial-gradient(circle at 42% 70%, rgba(200,160,80,.22) 0 6%, transparent 7%),
+      radial-gradient(circle at 60% 28%, rgba(200,160,80,.2) 0 5%, transparent 6%),
+      radial-gradient(circle at 40% 38%, var(--moon-hi), var(--moon) 58%, #d6b567 100%);
+    box-shadow: 0 0 40px 6px rgba(243,220,154,.4), 0 0 120px 30px rgba(243,220,154,.16);
+    animation: breathe 6s ease-in-out infinite;
+  }
+  .moon.pulse { animation: pulse .9s ease-out 1, breathe 6s ease-in-out .9s infinite; }
+  @keyframes breathe { 50% { box-shadow: 0 0 52px 10px rgba(243,220,154,.5), 0 0 140px 40px rgba(243,220,154,.2); } }
+  @keyframes pulse { 0% { transform: scale(1); } 35% { transform: scale(1.07); box-shadow: 0 0 70px 20px rgba(243,220,154,.7), 0 0 160px 50px rgba(243,220,154,.3); } 100% { transform: scale(1); } }
+
+  .date { font-size: 13px; letter-spacing: .32em; color: var(--dim); margin-top: 6px; }
+  h1 { margin: 0; font-family: var(--f-brush); font-weight: 400; font-size: clamp(56px, 19vw, 84px); line-height: 1.05; color: var(--moon); letter-spacing: .06em; text-wrap: balance; text-shadow: 0 2px 24px rgba(243,220,154,.25); }
+  .en { font-family: var(--f-en); font-style: italic; font-weight: 500; font-size: 19px; color: var(--dim); line-height: 1.4; }
+  .lead { margin: 0; color: var(--silver); font-size: 16px; max-width: 30em; text-wrap: balance; }
+
+  .picks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .pick {
+    display: flex; flex-direction: column; align-items: center; gap: 2px; text-decoration: none; color: inherit;
+    background: var(--card); border: 2px solid var(--line); border-radius: 26px; padding: 10px 10px 12px;
+    transition: transform .25s ease, background .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  .pick:hover { transform: translateY(-3px) rotate(-1deg); border-color: var(--moon); }
+  .pick:focus-visible { outline: 3px solid var(--moon); outline-offset: 3px; }
+  .pick .art { width: 100%; max-width: 168px; aspect-ratio: 1; display: block; }
+  .pick .nm { font-weight: 900; font-size: 17px; letter-spacing: .14em; margin-top: 2px; }
+  .pick .tag { font-size: 13px; color: var(--osmanthus); letter-spacing: .24em; }
+  .pick[aria-current="true"] { background: rgba(243,220,154,.16); border-color: var(--moon); box-shadow: 0 0 34px rgba(243,220,154,.4); }
+
+
+  .result { border-top: 1px solid var(--line); padding-top: 24px; display: flex; flex-direction: column; gap: 16px; min-height: 300px; scroll-margin-top: 16px; }
+  .result .big { width: min(58vw, 210px); aspect-ratio: 1; align-self: center; display: block; }
+  .result-head { display: flex; align-items: center; gap: 14px; }
+  .seal {
+    flex: none; width: 60px; height: 60px; background: var(--cinnabar); color: #fff3e6;
+    font-family: var(--f-brush); font-size: 40px; line-height: 60px; text-align: center;
+    border-radius: 6px; transform: rotate(-5deg); box-shadow: inset 0 0 0 2px rgba(255,243,230,.35);
+  }
+  .result-head h2 { margin: 0; font-size: 22px; font-weight: 900; letter-spacing: .1em; line-height: 1.3; }
+  .result-head p { margin: 0; font-size: 13px; letter-spacing: .24em; color: var(--osmanthus); }
+  .story { margin: 0; color: var(--dim); font-size: 15px; max-width: 34em; }
+  .blessing { margin: 0; font-size: clamp(22px, 6.4vw, 27px); font-weight: 600; line-height: 1.6; color: var(--moon); text-wrap: balance; }
+  .blessing-en { margin: 0; font-family: var(--f-en); font-style: italic; font-size: 19px; line-height: 1.45; color: var(--silver); }
+  .share { display: flex; flex-direction: column; gap: 6px; }
+  .share label { font-size: 13px; letter-spacing: .2em; color: var(--dim); }
+  .share .row { display: flex; gap: 8px; }
+  .share input { flex: 1; min-width: 0; font: 13px/1.4 ui-monospace, Menlo, Consolas, monospace; color: var(--silver); background: rgba(14,19,48,.75); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; }
+  .share input:focus-visible, .share button:focus-visible { outline: 3px solid var(--moon); outline-offset: 2px; }
+  .share button { flex: none; font: 600 15px var(--f-serif); letter-spacing: .1em; color: var(--night); background: var(--moon); border: 0; border-radius: 12px; padding: 0 16px; cursor: pointer; }
+  .share .status { min-height: 1.4em; font-size: 13px; color: var(--osmanthus); }
+  .from { display: flex; align-items: center; gap: 16px; margin-top: 6px; padding: 14px; border: 1px solid var(--line); border-radius: 22px; background: var(--card); }
+  .from img { flex: none; width: 88px; height: 88px; border-radius: 50%; object-fit: cover; border: 3px solid var(--moon); box-shadow: 0 0 22px rgba(243,220,154,.35); }
+  .from .who { display: flex; flex-direction: column; gap: 2px; }
+  .from .lbl { font-size: 13px; letter-spacing: .24em; color: var(--osmanthus); }
+  .from .nm2 { font-family: var(--f-brush); font-size: 38px; line-height: 1.2; color: var(--moon); letter-spacing: .1em; }
+  .from .en2 { font-family: var(--f-en); font-style: italic; font-size: 17px; color: var(--dim); line-height: 1.3; }
+  .sign { margin: 4px 0 0; font-size: 14px; letter-spacing: .3em; color: var(--dim); }
+  .fade { animation: rise .6s ease both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .moon, .moon.pulse, .fade, .pick { animation: none !important; transition: none !important; }
+  }
+</style>
+
+</head>
+<body>
+<svg class="defs" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="spark" viewBox="-6 -6 12 12"><path d="M0 -6 L1.8 -1.8 L6 0 L1.8 1.8 L0 6 L-1.8 1.8 L-6 0 L-1.8 -1.8Z"/></symbol>
+
+    <symbol id="art-moon" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="96" fill="#dcd3ff"/>
+      <circle cx="100" cy="102" r="58" fill="#ffe08a"/>
+      <circle cx="78" cy="84" r="9" fill="#f5cd6b"/><circle cx="126" cy="122" r="12" fill="#f5cd6b"/><circle cx="118" cy="76" r="5" fill="#f5cd6b"/>
+      <ellipse cx="84" cy="100" rx="4" ry="5.5" fill="#2a2350"/><ellipse cx="116" cy="100" rx="4" ry="5.5" fill="#2a2350"/>
+      <circle cx="85.5" cy="98" r="1.5" fill="#fff"/><circle cx="117.5" cy="98" r="1.5" fill="#fff"/>
+      <circle cx="72" cy="114" r="7" fill="#ff9fae" opacity=".8"/><circle cx="128" cy="114" r="7" fill="#ff9fae" opacity=".8"/>
+      <path d="M93 116 Q100 123 107 116" stroke="#c2566b" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <use href="#spark" x="30" y="40" width="18" height="18" fill="#ffb347"/><use href="#spark" x="156" y="34" width="14" height="14" fill="#ff9fc4"/><use href="#spark" x="150" y="150" width="18" height="18" fill="#ffb347"/><use href="#spark" x="34" y="146" width="12" height="12" fill="#ff9fc4"/>
+    </symbol>
+
+    <symbol id="art-chang" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="96" fill="#dcd3ff"/>
+      <path d="M168 26 a17 17 0 1 0 12 28 a13 13 0 1 1 -12 -28z" fill="#ffd35a"/>
+      <use href="#spark" x="20" y="36" width="16" height="16" fill="#ffb347"/><use href="#spark" x="34" y="94" width="10" height="10" fill="#ff9fc4"/><use href="#spark" x="160" y="90" width="12" height="12" fill="#ffb347"/>
+      <ellipse cx="100" cy="180" rx="66" ry="12" fill="#f6f2ff"/>
+      <circle cx="56" cy="174" r="15" fill="#f6f2ff"/><circle cx="144" cy="174" r="17" fill="#f6f2ff"/><circle cx="100" cy="168" r="18" fill="#f6f2ff"/>
+      <path d="M62 120 C14 106 20 162 64 148" fill="none" stroke="#ff9fc4" stroke-width="8" stroke-linecap="round"/>
+      <path d="M138 120 C186 106 180 162 136 148" fill="none" stroke="#ff9fc4" stroke-width="8" stroke-linecap="round"/>
+      <path d="M68 114 Q100 102 132 114 L146 166 Q100 182 54 166 Z" fill="#b9a4ff"/>
+      <path d="M86 108 L100 132 L114 108 Z" fill="#fff"/>
+      <rect x="70" y="140" width="60" height="9" rx="4.5" fill="#ff9fc4"/>
+      <circle cx="100" cy="70" r="36" fill="#3a2d6b"/>
+      <circle cx="66" cy="50" r="14" fill="#3a2d6b"/><circle cx="134" cy="50" r="14" fill="#3a2d6b"/>
+      <circle cx="66" cy="50" r="4.5" fill="#ffd35a"/><circle cx="134" cy="50" r="4.5" fill="#ffd35a"/>
+      <circle cx="100" cy="82" r="29" fill="#ffe3cf"/>
+      <path d="M70 74 Q100 40 130 74 Q116 60 100 62 Q84 60 70 74Z" fill="#3a2d6b"/>
+      <circle cx="100" cy="46" r="4.5" fill="#ffd35a"/>
+      <ellipse cx="88" cy="84" rx="3.6" ry="5.2" fill="#2a2350"/><ellipse cx="112" cy="84" rx="3.6" ry="5.2" fill="#2a2350"/>
+      <circle cx="89.4" cy="82" r="1.4" fill="#fff"/><circle cx="113.4" cy="82" r="1.4" fill="#fff"/>
+      <circle cx="78" cy="94" r="6" fill="#ff9fae" opacity=".8"/><circle cx="122" cy="94" r="6" fill="#ff9fae" opacity=".8"/>
+      <path d="M95 96 Q100 101 105 96" stroke="#c2566b" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      <path d="M128 118 L152 100" stroke="#ffe3cf" stroke-width="9" stroke-linecap="round" fill="none"/>
+      <line x1="152" y1="100" x2="152" y2="110" stroke="#c98a4b" stroke-width="2"/>
+      <rect x="147" y="106" width="10" height="5" rx="2" fill="#c98a4b"/>
+      <rect x="141" y="110" width="22" height="26" rx="11" fill="#ffb347"/>
+      <rect x="147" y="135" width="10" height="4" rx="2" fill="#c98a4b"/>
+      <path d="M152 114 V132" stroke="#ff8a3d" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="art-rabbit" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="96" fill="#ffe1ea"/>
+      <path d="M164 56h6v-6h6v6h6v6h-6v6h-6v-6h-6z" fill="#ff9fae"/>
+      <path d="M22 60h5v-5h5v5h5v5h-5v5h-5v-5h-5z" fill="#8fe3a8"/>
+      <ellipse cx="34" cy="106" rx="8" ry="4.5" fill="#8fe3a8" transform="rotate(-35 34 106)"/>
+      <ellipse cx="44" cy="120" rx="6" ry="3.5" fill="#6fcf8f" transform="rotate(25 44 120)"/>
+      <path d="M168 110 c-6-8 -18 0 -10 10 l10 10 l10-10 c8-10 -4-18 -10-10z" fill="#ff9fae"/>
+      <use href="#spark" x="150" y="22" width="14" height="14" fill="#ffb347"/><use href="#spark" x="26" y="26" width="12" height="12" fill="#ffb347"/>
+      <ellipse cx="78" cy="44" rx="14" ry="36" fill="#fff" transform="rotate(-12 78 44)"/>
+      <ellipse cx="78" cy="46" rx="7" ry="26" fill="#ffb6c8" transform="rotate(-12 78 46)"/>
+      <ellipse cx="122" cy="44" rx="14" ry="36" fill="#fff" transform="rotate(12 122 44)"/>
+      <ellipse cx="122" cy="46" rx="7" ry="26" fill="#ffb6c8" transform="rotate(12 122 46)"/>
+      <ellipse cx="100" cy="142" rx="42" ry="36" fill="#fff"/>
+      <ellipse cx="100" cy="94" rx="40" ry="34" fill="#fff"/>
+      <ellipse cx="86" cy="94" rx="5" ry="6.5" fill="#2a2350"/><ellipse cx="114" cy="94" rx="5" ry="6.5" fill="#2a2350"/>
+      <circle cx="87.6" cy="91.5" r="1.8" fill="#fff"/><circle cx="115.6" cy="91.5" r="1.8" fill="#fff"/>
+      <circle cx="72" cy="106" r="7" fill="#ff9fae" opacity=".75"/><circle cx="128" cy="106" r="7" fill="#ff9fae" opacity=".75"/>
+      <ellipse cx="100" cy="102" rx="3.4" ry="2.6" fill="#ff7f9c"/>
+      <path d="M93 108 Q96.5 113 100 108 Q103.5 113 107 108" stroke="#c2566b" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <g transform="rotate(20 140 128)">
+        <rect x="135" y="84" width="11" height="70" rx="5.5" fill="#c98a4b"/>
+        <rect x="131" y="80" width="19" height="14" rx="7" fill="#e0a35f"/>
+      </g>
+      <path d="M60 148 Q60 186 100 186 Q140 186 140 148 Z" fill="#f2a54a"/>
+      <rect x="54" y="142" width="92" height="11" rx="5.5" fill="#ffcf6b"/>
+      <path d="M78 164 q6 8 14 0" stroke="#ffcf6b" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <circle cx="128" cy="130" r="8" fill="#fff"/><circle cx="72" cy="134" r="8" fill="#fff"/>
+    </symbol>
+
+    <symbol id="art-wugang" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="96" fill="#d5f3e3"/>
+      <rect x="140" y="78" width="18" height="102" rx="8" fill="#a8683c"/>
+      <circle cx="150" cy="54" r="34" fill="#6cc59b"/><circle cx="120" cy="70" r="24" fill="#5bb98c"/><circle cx="178" cy="72" r="22" fill="#5bb98c"/>
+      <circle cx="140" cy="40" r="3.6" fill="#ffb347"/><circle cx="162" cy="48" r="3.6" fill="#ffb347"/><circle cx="126" cy="64" r="3.6" fill="#ffb347"/>
+      <circle cx="150" cy="70" r="3.6" fill="#ffb347"/><circle cx="176" cy="66" r="3.6" fill="#ffb347"/><circle cx="118" cy="80" r="3.6" fill="#ffb347"/>
+      <circle cx="166" cy="82" r="3.6" fill="#ffb347"/><circle cx="152" cy="28" r="3.6" fill="#ffb347"/>
+      <ellipse cx="124" cy="112" rx="3.6" ry="2.4" fill="#ffb347" transform="rotate(30 124 112)"/>
+      <ellipse cx="176" cy="122" rx="3.6" ry="2.4" fill="#ffb347" transform="rotate(-30 176 122)"/>
+      <ellipse cx="168" cy="150" rx="3.6" ry="2.4" fill="#ffb347" transform="rotate(20 168 150)"/>
+      <ellipse cx="112" cy="146" rx="3.6" ry="2.4" fill="#ffb347" transform="rotate(-20 112 146)"/>
+      <ellipse cx="100" cy="184" rx="72" ry="9" fill="#a6dcc0"/>
+      <rect x="50" y="170" width="18" height="12" rx="6" fill="#7a5238"/><rect x="76" y="170" width="18" height="12" rx="6" fill="#7a5238"/>
+      <path d="M46 118 Q72 106 98 118 L104 174 L40 174 Z" fill="#6aa6f8"/>
+      <rect x="44" y="140" width="56" height="8" rx="4" fill="#ffd35a"/>
+      <circle cx="72" cy="88" r="27" fill="#ffe3cf"/>
+      <path d="M45 82 Q46 56 72 56 Q98 56 99 82 Q88 68 72 68 Q56 68 45 82Z" fill="#3a2d6b"/>
+      <circle cx="72" cy="52" r="10" fill="#3a2d6b"/>
+      <rect x="45" y="74" width="54" height="7" rx="3.5" fill="#e0533d"/>
+      <ellipse cx="62" cy="92" rx="3.4" ry="4.8" fill="#2a2350"/><ellipse cx="82" cy="92" rx="3.4" ry="4.8" fill="#2a2350"/>
+      <circle cx="63.3" cy="90.4" r="1.3" fill="#fff"/><circle cx="83.3" cy="90.4" r="1.3" fill="#fff"/>
+      <circle cx="54" cy="101" r="5.5" fill="#ff9fae" opacity=".8"/><circle cx="90" cy="101" r="5.5" fill="#ff9fae" opacity=".8"/>
+      <path d="M66 103 Q72 109 78 103" stroke="#c2566b" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      <g transform="rotate(32 108 130)">
+        <rect x="104" y="86" width="8" height="70" rx="4" fill="#b07a45"/>
+        <path d="M112 88 Q138 82 136 110 Q118 112 112 102 Z" fill="#cfd6e6"/>
+        <path d="M118 94 Q128 92 129 102" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </g>
+      <path d="M96 124 L110 122" stroke="#ffe3cf" stroke-width="9" stroke-linecap="round"/>
+      <use href="#spark" x="24" y="30" width="14" height="14" fill="#ffb347"/><use href="#spark" x="112" y="26" width="10" height="10" fill="#ff9fc4"/>
+    </symbol>
+
+    <symbol id="art-toad" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="96" fill="#fff0c2"/>
+      <use href="#spark" x="24" y="34" width="16" height="16" fill="#ffb347"/><use href="#spark" x="160" y="28" width="12" height="12" fill="#ff9fc4"/><use href="#spark" x="166" y="104" width="16" height="16" fill="#ffb347"/><use href="#spark" x="20" y="100" width="10" height="10" fill="#ff9fc4"/>
+      <ellipse cx="100" cy="182" rx="74" ry="12" fill="#e8a83a"/>
+      <circle cx="46" cy="168" r="15" fill="#ffd35a"/><rect x="41" y="163" width="10" height="10" rx="1.5" fill="#e8a83a"/>
+      <circle cx="156" cy="168" r="15" fill="#ffd35a"/><rect x="151" y="163" width="10" height="10" rx="1.5" fill="#e8a83a"/>
+      <circle cx="100" cy="176" r="12" fill="#ffd35a"/><rect x="95.5" y="171.5" width="9" height="9" rx="1.5" fill="#e8a83a"/>
+      <ellipse cx="100" cy="128" rx="58" ry="46" fill="#7dd4a0"/>
+      <ellipse cx="100" cy="144" rx="38" ry="28" fill="#d8f5c8"/>
+      <circle cx="58" cy="112" r="5.5" fill="#5ab884"/><circle cx="46" cy="130" r="4" fill="#5ab884"/><circle cx="144" cy="110" r="5.5" fill="#5ab884"/><circle cx="154" cy="128" r="4" fill="#5ab884"/>
+      <circle cx="74" cy="84" r="21" fill="#7dd4a0"/><circle cx="126" cy="84" r="21" fill="#7dd4a0"/>
+      <circle cx="74" cy="84" r="14" fill="#fff"/><circle cx="126" cy="84" r="14" fill="#fff"/>
+      <circle cx="76" cy="86" r="8" fill="#2a2350"/><circle cx="124" cy="86" r="8" fill="#2a2350"/>
+      <circle cx="79" cy="83" r="2.6" fill="#fff"/><circle cx="127" cy="83" r="2.6" fill="#fff"/>
+      <circle cx="62" cy="116" r="8" fill="#ff9fae" opacity=".8"/><circle cx="138" cy="116" r="8" fill="#ff9fae" opacity=".8"/>
+      <path d="M68 122 Q100 148 132 122" stroke="#2a2350" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <circle cx="100" cy="138" r="12" fill="#ffd35a"/><rect x="95.5" y="133.5" width="9" height="9" rx="1.5" fill="#e8a83a"/>
+      <ellipse cx="58" cy="160" rx="16" ry="9" fill="#6cc994"/><ellipse cx="142" cy="160" rx="16" ry="9" fill="#6cc994"/>
+      <circle cx="46" cy="162" r="3" fill="#5ab884"/><circle cx="58" cy="166" r="3" fill="#5ab884"/><circle cx="130" cy="162" r="3" fill="#5ab884"/><circle cx="142" cy="166" r="3" fill="#5ab884"/>
+    </symbol>
+  </defs>
+</svg>
+
+<canvas id="stars" aria-hidden="true"></canvas>
+<canvas id="burst" aria-hidden="true"></canvas>
+
+<main>
+  <header>
+    <div class="moon" id="moon" aria-hidden="true"></div>
+    <div class="date">丙午年　八月十五</div>
+    <h1>中秋快樂</h1>
+    <div class="en">Happy Mid-Autumn Festival</div>
+    <p class="lead">月宮裡住著四位老朋友，請挑一位，聽祂的故事，收下今年來自佳禾的中秋祝福。</p>
+  </header>
+
+  <nav class="picks" aria-label="選擇一位月宮居民">
+    <a class="pick" href="#chang" data-k="chang"><svg class="art" viewBox="0 0 200 200" role="img" aria-label="可愛的嫦娥提著燈籠站在雲上"><use href="#art-chang" width="200" height="200"/></svg><span class="nm">嫦娥</span><span class="tag">平安</span></a>
+    <a class="pick" href="#rabbit" data-k="rabbit"><svg class="art" viewBox="0 0 200 200" role="img" aria-label="可愛的玉兔在藥臼旁搗藥"><use href="#art-rabbit" width="200" height="200"/></svg><span class="nm">玉兔</span><span class="tag">健康</span></a>
+    <a class="pick" href="#wugang" data-k="wugang"><svg class="art" viewBox="0 0 200 200" role="img" aria-label="可愛的吳剛扛著斧頭站在桂花樹旁"><use href="#art-wugang" width="200" height="200"/></svg><span class="nm">吳剛</span><span class="tag">事業</span></a>
+    <a class="pick" href="#toad" data-k="toad"><svg class="art" viewBox="0 0 200 200" role="img" aria-label="可愛的金蟾坐在金幣上"><use href="#art-toad" width="200" height="200"/></svg><span class="nm">蟾蜍</span><span class="tag">財運</span></a>
+  </nav>
+
+  <section class="result" id="result" aria-live="polite">
+    <svg class="big" id="rart" viewBox="0 0 200 200" aria-hidden="true"><use id="rartUse" href="#art-moon" width="200" height="200"/></svg>
+    <div class="result-head">
+      <div class="seal" id="seal">月</div>
+      <div>
+        <h2 id="rname">月宮來信</h2>
+        <p id="rtag">請點選上方一位</p>
+      </div>
+    </div>
+    <p class="story" id="rstory">相傳每逢八月十五，月宮的門會為人間打開。嫦娥、玉兔、吳剛與蟾蜍各守一份祝福，等著送給有緣的人。</p>
+    <p class="blessing" id="rbless">願今夜月色，照亮您與家人的團圓。</p>
+    <p class="blessing-en" id="rbenx">May tonight's moonlight bring you and your family together.</p>
+    <div class="share" id="share" hidden>
+      <label for="linkBox">這位居民的專屬連結</label>
+      <div class="row">
+        <input id="linkBox" type="text" readonly value="">
+        <button id="copyBtn" type="button">複製</button>
+      </div>
+      <div class="status" id="copyStatus" role="status"></div>
+    </div>
+    <div class="from">
+      <img src="assets/photo.jpg" width="88" height="88" alt="佳禾在新加坡星耀樟宜的雨漩渦瀑布前自拍">
+      <div class="who">
+        <span class="lbl">祝福來自</span>
+        <span class="nm2">佳禾</span>
+        <span class="en2">With warm wishes, Chia-Ho</span>
+      </div>
+    </div>
+    <p class="sign">中秋快樂　月圓人團圓</p>
+  </section>
+</main>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* 點擊統計：貼上 Google Apps Script 網頁應用程式網址（見 README）。留空則不統計。 */
+  var COUNT_ENDPOINT = "";
+  function pageUrl() { return location.origin + location.pathname; }
+  var KEYS = ["chang", "rabbit", "wugang", "toad"];
+
+  var DATA = {
+    chang: {
+      glyph: "嫦", name: "嫦娥", tag: "平安",
+      story: "后羿射落九日後，得到一包不死仙藥。嫦娥為保護仙藥吞下，身子輕輕飄起，飛向月亮，從此住在廣寒宮，年年望著人間的燈火。",
+      bless: "願您與家人平安順遂，無論身在何處，都有一輪月亮陪伴。",
+      en: "May peace and safety follow you and yours, wherever the moon shines."
+    },
+    rabbit: {
+      glyph: "兔", name: "玉兔", tag: "健康",
+      story: "玉兔在月宮的桂樹下搗藥，杵聲叮咚，一杵一劑。民間相信，祂有時會化身下凡，為生病的人送藥，這也是北京「兔兒爺」的由來。",
+      bless: "一杵一劑，搗成健康。願您身體康泰，精神飽滿，笑口常開。",
+      en: "A pinch of health, a pound of joy. May you be well and full of energy."
+    },
+    wugang: {
+      glyph: "桂", name: "吳剛", tag: "事業",
+      story: "吳剛因學仙不專心，被罰到月宮砍一棵桂樹。樹的傷口隨砍隨合，永遠砍不倒。這份不放棄的勁，成了堅持與耐力的象徵。",
+      bless: "願您的努力像桂樹一樣越砍越茂盛，事業節節高升，桂冠在握。",
+      en: "May your effort grow ever stronger, like the tree that never falls."
+    },
+    toad: {
+      glyph: "蟾", name: "蟾蜍", tag: "財運",
+      story: "古書記載月中有蟾蜍，有一說是嫦娥奔月後所化。科舉時代把登科及第稱為「蟾宮折桂」，三足金蟾也被視為招財進寶的吉祥神獸。",
+      bless: "願您蟾宮折桂，財源廣進，今年的好運像滿月一樣圓滿。",
+      en: "May good fortune fill your year, as full and bright as tonight's moon."
+    }
+  };
+
+  var picks = Array.prototype.slice.call(document.querySelectorAll(".pick"));
+  var moon = document.getElementById("moon");
+  var $ = function (id) { return document.getElementById(id); };
+  var els = {
+    seal: $("seal"), name: $("rname"), tag: $("rtag"), story: $("rstory"), bless: $("rbless"), en: $("rbenx"),
+    box: $("result"), art: $("rart"), artUse: $("rartUse"), share: $("share"), link: $("linkBox"),
+    copy: $("copyBtn"), status: $("copyStatus")
+  };
+  var current = null;
+
+  function show(key, animate, x, y) {
+    var d = DATA[key];
+    if (!d) return;
+    current = key;
+    picks.forEach(function (a) {
+      if (a.getAttribute("data-k") === key) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
+    });
+    els.artUse.setAttribute("href", "#art-" + key);
+    els.seal.textContent = d.glyph;
+    els.name.textContent = d.name;
+    els.tag.textContent = "送您的祝福　" + d.tag;
+    els.story.textContent = d.story;
+    els.bless.textContent = d.bless;
+    els.en.textContent = d.en;
+    els.share.hidden = false;
+    els.link.value = pageUrl() + "#" + key;
+    els.status.textContent = "";
+    if (animate && !reduce) {
+      [els.art, els.seal, els.story, els.bless, els.en].forEach(function (n) {
+        n.classList.remove("fade"); void n.getBoundingClientRect(); n.classList.add("fade");
+      });
+      moon.classList.remove("pulse"); void moon.offsetWidth; moon.classList.add("pulse");
+      burst(x, y);
+    }
+    if (animate) { try { els.box.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "nearest" }); } catch (e) {} }
+  }
+
+  picks.forEach(function (a) {
+    a.addEventListener("click", function (ev) {
+      ev.preventDefault();
+      var key = a.getAttribute("data-k");
+      var r = a.getBoundingClientRect();
+      var x = ev.clientX || r.left + r.width / 2, y = ev.clientY || r.top + r.height / 2;
+      show(key, true, x, y);
+      try { history.replaceState(null, "", "#" + key); } catch (e) {}
+      countClick(key);
+    });
+  });
+
+  function fromHash() {
+    var h = (location.hash || "").replace("#", "");
+    if (DATA[h]) show(h, false);
+  }
+  fromHash();
+  addEventListener("hashchange", fromHash);
+
+  els.copy.addEventListener("click", function () {
+    var text = els.link.value;
+    function fallback() { els.link.focus(); els.link.select(); els.status.textContent = "請長按或按 Ctrl+C 複製上方連結"; }
+    try {
+      navigator.clipboard.writeText(text).then(function () { els.status.textContent = "已複製，可以貼給朋友了"; }, fallback);
+    } catch (e) { fallback(); }
+  });
+
+  /* ---------- click counting (sent to a Google Sheet, never shown on the page) ---------- */
+  function countClick(key) {
+    if (!COUNT_ENDPOINT) return;
+    try {
+      fetch(COUNT_ENDPOINT, {
+        method: "POST", mode: "no-cors", keepalive: true,
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({ blessing: key })
+      }).catch(function () {});
+    } catch (e) {}
+  }
+
+  /* ---------- stars ---------- */
+  var sc = $("stars"), sx = sc.getContext("2d"), stars = [];
+  function sizeStars() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    sc.width = innerWidth * dpr; sc.height = innerHeight * dpr;
+    sx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    stars = [];
+    var n = Math.round(innerWidth * innerHeight / 9000);
+    for (var i = 0; i < n; i++) stars.push({ x: Math.random() * innerWidth, y: Math.random() * innerHeight, r: Math.random() * 1.3 + .3, p: Math.random() * 6.28, s: Math.random() * .8 + .3 });
+    drawStars(0);
+  }
+  function drawStars(t) {
+    sx.clearRect(0, 0, innerWidth, innerHeight);
+    stars.forEach(function (s) {
+      var a = reduce ? .6 : .35 + .5 * Math.abs(Math.sin(s.p + t / 1000 * s.s));
+      sx.fillStyle = "rgba(236,238,227," + a.toFixed(3) + ")";
+      sx.beginPath(); sx.arc(s.x, s.y, s.r, 0, 6.283); sx.fill();
+    });
+    if (!reduce) requestAnimationFrame(drawStars);
+  }
+  sizeStars();
+  addEventListener("resize", sizeStars);
+
+  /* ---------- osmanthus burst ---------- */
+  var bc = $("burst"), bx = bc.getContext("2d"), parts = [], running = false;
+  function sizeBurst() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    bc.width = innerWidth * dpr; bc.height = innerHeight * dpr;
+    bx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  sizeBurst(); addEventListener("resize", sizeBurst);
+  function burst(x, y) {
+    for (var i = 0; i < 46; i++) {
+      var a = Math.random() * 6.283, v = Math.random() * 3.2 + 1;
+      parts.push({ x: x, y: y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 1.6, life: 1, size: Math.random() * 2.6 + 1.6, hue: Math.random() < .6 ? "233,166,76" : "243,220,154" });
+    }
+    if (!running) { running = true; requestAnimationFrame(tick); }
+  }
+  function tick() {
+    bx.clearRect(0, 0, innerWidth, innerHeight);
+    parts = parts.filter(function (p) { return p.life > 0; });
+    parts.forEach(function (p) {
+      p.x += p.vx; p.y += p.vy; p.vy += .07; p.vx *= .985; p.life -= .014;
+      bx.fillStyle = "rgba(" + p.hue + "," + Math.max(p.life, 0).toFixed(3) + ")";
+      bx.beginPath(); bx.arc(p.x, p.y, p.size, 0, 6.283); bx.fill();
+    });
+    if (parts.length) requestAnimationFrame(tick); else { running = false; bx.clearRect(0, 0, innerWidth, innerHeight); }
+  }
+})();
+</script>
+</body>
+</html>
